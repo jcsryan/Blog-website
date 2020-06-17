@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Comment, User, Post, Vote } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -57,7 +58,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
    // expects {username: 'Feuerbacher', email: 'feuerbacherb@gmail.com', password: 'password1234'}
    User.create({
       username: req.body.username,
@@ -79,7 +80,7 @@ router.post('/', (req, res) => {
       });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', withAuth, (req, res) => {
    User.findOne({
      where: {
        email: req.body.email
@@ -109,7 +110,7 @@ router.post('/login', (req, res) => {
  });
 
  // allow users to log out
- router.post('/logout', (req, res) => {
+ router.post('/logout', withAuth, (req, res) => {
    if (req.session.loggedIn) {
       req.session.destroy(() => {
         res.status(204).end();
@@ -121,7 +122,7 @@ router.post('/login', (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
    // expects {username: 'Feuerbacher', email: 'feuerbacherb@gmail.com', password: 'password1234'}
 
    // if req.body has exact key/value pairs to match the model, you can just use the `req.body` instead
@@ -145,7 +146,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/users/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
    User.destroy({
       where: {
          id: req.params.id
