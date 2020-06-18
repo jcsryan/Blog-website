@@ -150,7 +150,10 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 // delete a post
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
+
+
+
   Post.destroy(
     {
       where: {
@@ -169,5 +172,5 @@ router.delete('/:id', withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
-
+  
 module.exports = router;
