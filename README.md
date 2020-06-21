@@ -26,7 +26,7 @@
 
 
 ## Usage
-### Create a profile to add remove, and upvote other posts on the page. The PW must be at least six characters.
+### Create a profile to add remove, and upvote other posts on the page. The PW must be at least six characters. 
 
 
 ## Install
@@ -35,6 +35,8 @@ npm init  --> npm install mysql2 sequelize dotenv handlebars
 
 npm install nodemon "if you want an easier time testing while changing routes"
 
+
+add JAWSDB in heroku and 'heroku restart' to inform the server to fill a DB that is no longer on your local machine. 
 
 ## Questions
 ## Contact me at:
